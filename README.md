@@ -10,6 +10,9 @@ OP.Notes is a small note taking application which I've created after searching f
 
 The closest I could come up with was Evernote but I was not really satisfied with its GUI so I've decided to create my own version.
 
+## Move from Codeplex
+This application was previously hosted on Codeplex but since the Codeplex shutdown I had to move it to somewhere else so I decided on GitHub.
+
 # Requirements
 .NET Framework 4.5 or later
 
