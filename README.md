@@ -1,3 +1,5 @@
+[OP.Notes](op.notes.png)
+
 # Project Description
 OP.Notes is a small note taking application which I've created after searching for a long time for a note taking application which would suit my needs:
 - It should work offline
@@ -25,11 +27,23 @@ The closest I could come up with was Evernote but I was not really satisfied wit
 - Supports 'tagging' system to quickly navigate notes
 - Supports instant-filtered search
 
+If you would copy/paste the screenshot text into a notepad you would get the following text:
+
+\# This is a header  
+This is *bolded*  
+
+\[\]This is a TODO  
+\[x\]This is completed TODO 
+
 # Missing features
 - No global undo/redo - undo/redo works when editing a single note but not across all notes or other non-text manipulation actions (such as note/notebook deleting)
 - Can not change settings - things like notebook folder and Autosave interval are hard-coded into the application. There is no possibility to change the settings
 - Image manipulation - any displayed image is automatically zoomed out to fit into the display area. You can not select to show image in full resolution.
 - Paste image from file - you may only paste from clipboard
+
+ 
+
+
 
 # How to use
 Once you start the application you will be presented with a basically empty window. 
