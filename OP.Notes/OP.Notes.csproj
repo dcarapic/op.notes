@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0B6DAF76-8A02-4D01-BC5D-EAE95AC214B5}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OP.Notes</RootNamespace>
+    <AssemblyName>OP.Notes</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <ExpressionBlendVersion>12.0.41212.0</ExpressionBlendVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Images\OP.Notes.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.AvalonEdit">
+      <HintPath>..\DLL\ICSharpCode.AvalonEdit.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Controls\ucNote.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ucNotebook.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ucNotebookTitle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\ucNote.xaml.cs">
+      <DependentUpon>ucNote.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ucNotebook.xaml.cs">
+      <DependentUpon>ucNotebook.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ucNotebookTitle.xaml.cs">
+      <DependentUpon>ucNotebookTitle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DwmApiInterop.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Model\Events.cs" />
+    <Compile Include="Model\INotebook.cs" />
+    <Compile Include="Model\INote.cs" />
+    <Compile Include="Model\NotebookProvider.cs" />
+    <Compile Include="Model\NoteException.cs" />
+    <Compile Include="Model\TextNote.cs" />
+    <Compile Include="Model\TextNotebook.cs" />
+    <Compile Include="Model\NotifyPropertyChanged.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OP.Notes.Controls\OP.Notes.Controls.csproj">
+      <Project>{a74ce1c3-ac9e-4d6e-94ff-13b82468ba98}</Project>
+      <Name>OP.Notes.Controls</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\16\breadcrumb_separator_arrow_1_dot.png" />
+    <Resource Include="Images\16\breadcrumb_separator_arrow_full.png" />
+    <Resource Include="Images\16\check.png" />
+    <Resource Include="Images\16\close.png" />
+    <Resource Include="Images\16\gem_okay.png" />
+    <Resource Include="Images\16\gem_options.png" />
+    <Resource Include="Images\16\gem_remove.png" />
+    <Resource Include="Images\16\marker_rounded_edit.png" />
+    <Resource Include="Images\16\marker_rounded_green.png" />
+    <Resource Include="Images\16\marker_rounded_light_blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\16\accept.png" />
+    <Resource Include="Images\16\add.png" />
+    <Resource Include="Images\16\asterisk_orange.png" />
+    <Resource Include="Images\16\attach.png" />
+    <Resource Include="Images\16\book.png" />
+    <Resource Include="Images\16\book_add.png" />
+    <Resource Include="Images\16\book_delete.png" />
+    <Resource Include="Images\16\book_edit.png" />
+    <Resource Include="Images\16\book_next.png" />
+    <Resource Include="Images\16\book_open.png" />
+    <Resource Include="Images\16\book_previous.png" />
+    <Resource Include="Images\16\bullet_add.png" />
+    <Resource Include="Images\16\bullet_delete.png" />
+    <Resource Include="Images\16\bullet_disk.png" />
+    <Resource Include="Images\16\bullet_error.png" />
+    <Resource Include="Images\16\bullet_go.png" />
+    <Resource Include="Images\16\bullet_green.png" />
+    <Resource Include="Images\16\bullet_key.png" />
+    <Resource Include="Images\16\cancel.png" />
+    <Resource Include="Images\16\cog.png" />
+    <Resource Include="Images\16\coins.png" />
+    <Resource Include="Images\16\comment.png" />
+    <Resource Include="Images\16\comment_add.png" />
+    <Resource Include="Images\16\comment_delete.png" />
+    <Resource Include="Images\16\comment_edit.png" />
+    <Resource Include="Images\16\cursor.png" />
+    <Resource Include="Images\16\database.png" />
+    <Resource Include="Images\16\database_add.png" />
+    <Resource Include="Images\16\database_delete.png" />
+    <Resource Include="Images\16\database_edit.png" />
+    <Resource Include="Images\16\database_error.png" />
+    <Resource Include="Images\16\date.png" />
+    <Resource Include="Images\16\delete.png" />
+    <Resource Include="Images\16\disk.png" />
+    <Resource Include="Images\16\disk_multiple.png" />
+    <Resource Include="Images\16\email.png" />
+    <Resource Include="Images\16\emotion_evilgrin.png" />
+    <Resource Include="Images\16\emotion_grin.png" />
+    <Resource Include="Images\16\emotion_happy.png" />
+    <Resource Include="Images\16\emotion_smile.png" />
+    <Resource Include="Images\16\emotion_suprised.png" />
+    <Resource Include="Images\16\emotion_tongue.png" />
+    <Resource Include="Images\16\emotion_unhappy.png" />
+    <Resource Include="Images\16\emotion_waii.png" />
+    <Resource Include="Images\16\emotion_wink.png" />
+    <Resource Include="Images\16\error.png" />
+    <Resource Include="Images\16\exclamation.png" />
+    <Resource Include="Images\16\eye.png" />
+    <Resource Include="Images\16\find.png" />
+    <Resource Include="Images\16\flag_blue.png" />
+    <Resource Include="Images\16\flag_green.png" />
+    <Resource Include="Images\16\flag_orange.png" />
+    <Resource Include="Images\16\flag_pink.png" />
+    <Resource Include="Images\16\group.png" />
+    <Resource Include="Images\16\heart.png" />
+    <Resource Include="Images\16\help.png" />
+    <Resource Include="Images\16\hourglass.png" />
+    <Resource Include="Images\16\information.png" />
+    <Resource Include="Images\16\key.png" />
+    <Resource Include="Images\16\keyboard.png" />
+    <Resource Include="Images\16\lightbulb.png" />
+    <Resource Include="Images\16\lightning.png" />
+    <Resource Include="Images\16\lock.png" />
+    <Resource Include="Images\16\lock_open.png" />
+    <Resource Include="Images\16\magnifier.png" />
+    <Resource Include="Images\16\magnifier_zoom_in.png" />
+    <Resource Include="Images\16\magnifier_zoom_out.png" />
+    <Resource Include="Images\16\monitor.png" />
+    <Resource Include="Images\16\mouse.png" />
+    <Resource Include="Images\16\note.png" />
+    <Resource Include="Images\16\note_add.png" />
+    <Resource Include="Images\16\note_delete.png" />
+    <Resource Include="Images\16\note_edit.png" />
+    <Resource Include="Images\16\page_white_horizontal.png" />
+    <Resource Include="Images\16\page_white_text.png" />
+    <Resource Include="Images\16\page_white_text_width.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\16\tag.png" />
+    <Resource Include="Images\16\tag_blue.png" />
+    <Resource Include="Images\16\tag_blue_add.png" />
+    <Resource Include="Images\16\tag_blue_delete.png" />
+    <Resource Include="Images\16\tag_blue_edit.png" />
+    <Resource Include="Images\16\tag_green.png" />
+    <Resource Include="Images\16\tag_orange.png" />
+    <Resource Include="Images\16\tag_pink.png" />
+    <Resource Include="Images\16\tag_purple.png" />
+    <Resource Include="Images\16\tag_red.png" />
+    <Resource Include="Images\16\tag_yellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\16\ui-check-box-uncheck.png" />
+    <Resource Include="Images\16\ui-check-box.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\OP.Notes.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\16\cross-circle.png" />
+    <Resource Include="Images\16\cross-small.png" />
+    <Resource Include="Images\16\cross.png" />
+    <Resource Include="Images\16\hand-point-090.png" />
+    <Resource Include="Images\16\hand-share.png" />
+    <Resource Include="Images\16\minus-small.png" />
+    <Resource Include="Images\16\minus.png" />
+    <Resource Include="Images\16\plus-small.png" />
+    <Resource Include="Images\16\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\w_close.png" />
+    <Resource Include="Images\w_maximize.png" />
+    <Resource Include="Images\w_minimize.png" />
+    <Resource Include="Images\w_restore.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

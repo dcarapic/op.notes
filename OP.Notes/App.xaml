@@ -1,0 +1,268 @@
+﻿<Application x:Class="OP.Notes.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:my="clr-namespace:OP.Notes.Controls"
+             xmlns:myc="clr-namespace:OP.Notes.Controls;assembly=OP.Notes.Controls"
+             xmlns:model="clr-namespace:OP.Notes.Model"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+
+        <Color x:Key="ColorDarkest">Black</Color>
+        <Color x:Key="ColorDarker2">#FF383838</Color>
+        <Color x:Key="ColorDarker">#FF787878</Color>
+        <Color x:Key="ColorDark">#FF787878</Color>
+        <Color x:Key="ColorLight">#FFC3C3C3</Color>
+        <Color x:Key="ColorLighter">#FFB3B3B3</Color>
+        <Color x:Key="ColorLighter2">#FFE3E3E3</Color>
+        <Color x:Key="ColorLightest">White</Color>
+        <Color x:Key="ColorStandout">DodgerBlue</Color>
+        <Color x:Key="ColorStandoutInv">White</Color>
+        <myc:BoolToVisibilityConverter x:Key="BoolToHiddenConverter" TrueValue="Visible" FalseValue="Hidden"/>
+
+
+        <SolidColorBrush x:Key="BrushDarkest" Color="{StaticResource ColorDarkest}"/>
+        <SolidColorBrush x:Key="BrushDarker2" Color="{StaticResource ColorDarker2}"/>
+        <SolidColorBrush x:Key="BrushDarker" Color="{StaticResource ColorDarker}"/>
+        <SolidColorBrush x:Key="BrushDark" Color="{StaticResource ColorDark}"/>
+        <SolidColorBrush x:Key="BrushLight" Color="{StaticResource ColorLight}"/>
+        <SolidColorBrush x:Key="BrushLighter" Color="{StaticResource ColorLighter}"/>
+        <SolidColorBrush x:Key="BrushLighter2" Color="{StaticResource ColorLighter2}"/>
+        <SolidColorBrush x:Key="BrushLightest" Color="{StaticResource ColorLightest}"/>
+        <SolidColorBrush x:Key="BrushStandout" Color="{StaticResource ColorStandout}"/>
+        <SolidColorBrush x:Key="BrushStandoutInv" Color="{StaticResource ColorStandoutInv}"/>
+
+        <LinearGradientBrush x:Key="WindowBackground" StartPoint="0,0" EndPoint="0,30" MappingMode="Absolute">
+            <GradientStop Color="{StaticResource ColorDarker}" Offset="0" />
+            <GradientStop Color="{StaticResource ColorDarkest}" Offset="1" />
+        </LinearGradientBrush>
+
+        <Style x:Key="DefaultWindowStyle" TargetType="{x:Type Window}">
+            <Setter Property="Background" Value="{StaticResource WindowBackground}"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <Style x:Key="NbTabContainerStyle" TargetType="{x:Type ListBox}">
+            <Setter Property="Background" Value="{x:Null}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="-2"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style TargetType="{x:Type ListBoxItem}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                    <Border x:Name="border" BorderThickness="0" CornerRadius="4,4,0,0" Margin="4,4,0,0" Padding="4">
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" SpreadMethod="Reflect"  >
+                                                <GradientStop Color="{StaticResource ColorDarker}" Offset="0" />
+                                                <GradientStop Color="{StaticResource ColorLighter}" Offset="1" />
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                        <ContentPresenter />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" TargetName="border">
+                                                <Setter.Value>
+                                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" SpreadMethod="Pad">
+                                                        <GradientStop Color="{StaticResource ColorLightest}" Offset="0" />
+                                                        <GradientStop Color="{StaticResource ColorLightest}" Offset="1" />
+                                                    </LinearGradientBrush>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+
+
+        <Style x:Key="NbTitleInputStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType=Label, AncestorLevel=1}, Path=Foreground}"/>
+        </Style>
+
+        <Style x:Key="NbNewStyle" TargetType="{x:Type Label}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType=Label, AncestorLevel=1}, Path=Foreground}"/>
+        </Style>
+
+
+        <ItemsPanelTemplate x:Key="NbTagContainerVerticalContainerStyle">
+            <StackPanel Orientation="Vertical" Margin="0,30,0,0" MinWidth="150" />
+        </ItemsPanelTemplate>
+
+        <ItemsPanelTemplate x:Key="NbTagContainerHorizontalContainerStyle">
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,4"/>
+        </ItemsPanelTemplate>
+
+        <Style x:Key="NbTagContainerStyle" TargetType="{x:Type ListBox}">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="ItemsPanel" Value="{StaticResource NbTagContainerVerticalContainerStyle}"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" SpreadMethod="Pad" ColorInterpolationMode="SRgbLinearInterpolation" >
+                        <GradientStop Color="{StaticResource ColorLightest}" Offset="0" />
+                        <GradientStop Color="{StaticResource ColorLighter2}" Offset="1" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="NbTagStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border x:Name="border" BorderThickness="0" SnapsToDevicePixels="true" CornerRadius="4" Margin="4,2,4,0" Padding="4" Background="{StaticResource BrushLighter2}">
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox Name="chkFixedTag" Margin="0" Padding="0" VerticalAlignment="Center" Visibility="{Binding RelativeSource={RelativeSource Self}, Path=IsChecked, Converter={StaticResource BoolToHiddenConverter}}"/>
+                                <Label Name="lblTag" VerticalAlignment="Center" Foreground="{StaticResource BrushDarkest}" Content="{TemplateBinding Content}"/>
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource BrushStandout}"/>
+                                <Setter Property="Foreground" TargetName="lblTag" Value="{StaticResource BrushStandoutInv}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Visibility" TargetName="chkFixedTag" Value="Visible"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ToggleButtonStyle" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Border x:Name="border" BorderThickness="0" SnapsToDevicePixels="true" CornerRadius="4" Padding="4" Background="{StaticResource BrushLighter2}">
+                            <Label Padding="0" HorizontalAlignment="Left" x:Name="label" VerticalAlignment="Center" Foreground="{StaticResource BrushDarkest}" Content="{TemplateBinding Content}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked"  Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource BrushStandout}"/>
+                                <Setter Property="Foreground" TargetName="label" Value="{StaticResource BrushStandoutInv}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="NoteTitleInputStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+
+
+        <Style x:Key="NoteCheckbox" TargetType="{x:Type CheckBox}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="FocusVisualStyle">
+                <Setter.Value>
+                    <Style>
+                        <Setter Property="Control.Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Border>
+                                        <Rectangle Margin="15,0,0,0" Stroke="{StaticResource BrushLighter}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="#EEE" Offset="0.0"/>
+                        <GradientStop Color="#CCC" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderBrush">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="#CCC" Offset="0.0"/>
+                        <GradientStop Color="#444" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+
+                        <Grid Width="13" Height="13" Margin="1">
+                            <Border x:Name="Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"/>
+                            <Path x:Name="CheckMark" Stroke="#444" StrokeThickness="1" SnapsToDevicePixels="False" Data="M 3 3 L 10 10 M 3 10 L 10 3"/>
+                        </Grid>
+
+                        <!-- This uses Visibility to hide and show the CheckMark on IsChecked -->
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="false">
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="CheckMark"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="Border">
+                                    <Setter.Value>
+                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                            <GradientStop Color="#FFF" Offset="0.0"/>
+                                            <GradientStop Color="#AAA" Offset="1.0"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="Border">
+                                    <Setter.Value>
+                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                            <GradientStop Color="#BBB" Offset="0.0"/>
+                                            <GradientStop Color="#EEE" Offset="0.1"/>
+                                            <GradientStop Color="#EEE" Offset="0.9"/>
+                                            <GradientStop Color="#FFF" Offset="1.0"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="BorderBrush" TargetName="Border">
+                                    <Setter.Value>
+                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                            <GradientStop Color="#444" Offset="0.0"/>
+                                            <GradientStop Color="#888" Offset="1.0"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" Value="#EEE" TargetName="Border"/>
+                                <Setter Property="BorderBrush" Value="#AAA" TargetName="Border"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Application.Resources>
+</Application>

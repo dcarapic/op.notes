@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="OP.Notes.Controls.ucNotebook"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:my="clr-namespace:OP.Notes.Controls;assembly=OP.Notes.Controls"
+             x:Name="mySelf"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="600">
+    <DockPanel LastChildFill="true">
+        <ListBox Style="{StaticResource NbTagContainerStyle}" Name="lbTags" SelectionChanged="lbTags_SelectionChanged" SelectionMode="Extended">
+            <ListBoxItem Style="{StaticResource NbTagStyle}" Name="liAll">All</ListBoxItem>
+            <ListBoxItem Style="{StaticResource NbTagStyle}" Name="liTodo">Todo</ListBoxItem>
+        </ListBox>
+        <DockPanel LastChildFill="true">
+            <DockPanel DockPanel.Dock="top" Margin="10,10,10,0">
+                <Image Source="/Images/16/magnifier.png" Stretch="None"/>
+                <Image Name="imgClearFilter" DockPanel.Dock="Right" Source="/Images/16/cross-small.png" Stretch="None" Visibility="Hidden" Cursor="Hand" MouseUp="imgClearFilter_MouseUp"/>
+                <TextBox Name="txtFilterNotes" Style="{StaticResource NoteTitleInputStyle}" KeyUp="txtFilterNotes_KeyUp" TextChanged="txtFilterNotes_TextChanged"/>
+            </DockPanel>
+            <my:ExtScrollViewer Name="scrollNotes" VerticalScrollBarVisibility="Auto" Padding="10">
+                <StackPanel FocusManager.IsFocusScope="True" Name="pnlNotes" Orientation="Vertical"/>
+            </my:ExtScrollViewer>
+        </DockPanel>
+    </DockPanel>
+
+</UserControl>

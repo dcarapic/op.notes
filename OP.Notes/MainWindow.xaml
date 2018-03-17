@@ -1,0 +1,48 @@
+﻿<Window x:Class="OP.Notes.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:my="clr-namespace:OP.Notes.Controls"
+        xmlns:model="clr-namespace:OP.Notes.Model"
+        x:Name="mySelf"
+        Title="OP.Notes v" Height="600" Width="800" PreviewKeyDown="Window_PreviewKeyDown" Style="{StaticResource DefaultWindowStyle}" Closing="Window_Closing" Icon="/Images/OP.Notes.ico" WindowStyle="None" ResizeMode="CanResizeWithGrip" AllowsTransparency="True" StateChanged="mySelf_StateChanged" BorderThickness="1,2" BorderBrush="#FFACACAC" >
+    <DockPanel LastChildFill="true">
+        <DockPanel DockPanel.Dock="Top">
+            <Border DockPanel.Dock="Top" Height="8" Name="borderCaption" Background="Transparent"  />
+            <Image Name="btnClose" DockPanel.Dock="Right" MouseUp="btnClose_Click" Source="/Images/w_close.png" Stretch="None" Cursor="Hand" Margin="5" ToolTip="Close" VerticalAlignment="Stretch"/>
+            <Image Name="btnMaximize" DockPanel.Dock="Right" MouseUp="btnMaximize_Click" Source="/Images/w_maximize.png" Stretch="None" Cursor="Hand" Margin="5" ToolTip="Maximize" VerticalAlignment="Stretch"/>
+            <Image Name="btnRestore" DockPanel.Dock="Right" MouseUp="btnRestore_Click" Source="/Images/w_restore.png" Stretch="None" Cursor="Hand" Margin="5" ToolTip="Restore" VerticalAlignment="Stretch"/>
+            <Image Name="btnMinimize" DockPanel.Dock="Right" MouseUp="btnMinimize_Click" Source="/Images/w_minimize.png" Stretch="None" Cursor="Hand" Margin="5" ToolTip="Minimize" VerticalAlignment="Stretch"/>
+            <Image Name="btnNewNotebook" DockPanel.Dock="Right" MouseUp="btnNewNotebook_Click" Source="/Images/16/book_add.png" Stretch="None" Cursor="Hand" Width="32" Margin="5" ToolTip="New notebook" VerticalAlignment="Stretch"/>
+            <ListBox DockPanel.Dock="Left" Name="lbNotebooks" VerticalAlignment="Stretch"  Style="{StaticResource NbTabContainerStyle}" SelectionChanged="lbNotebooks_SelectionChanged">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+        </DockPanel>
+        <StatusBar DockPanel.Dock="Bottom" VerticalAlignment="Top">
+            <ToggleButton Name="toggleAutosave" Style="{StaticResource ToggleButtonStyle}" IsChecked="True" Checked="toggleAutosave_Checked" Unchecked="toggleAutosave_Checked">
+                <StackPanel Orientation="Horizontal">
+                    <Image Name="imgStatusSave" Source="/Images/16/disk.png" Stretch="None" Visibility="Hidden"/>
+                    <Label Padding="0" Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type Label}, Mode=FindAncestor}, Path=Foreground}">Autosave</Label>
+                </StackPanel>
+            </ToggleButton>
+            <ToggleButton Name="toggleWrap" Style="{StaticResource ToggleButtonStyle}" IsChecked="True" Checked="toggleWrap_Checked" Unchecked="toggleWrap_Checked">
+                Wrap
+            </ToggleButton>
+            <ToggleButton Name="toggleOnTop" Style="{StaticResource ToggleButtonStyle}" IsChecked="false" Checked="toggleOnTop_Checked" Unchecked="toggleOnTop_Checked">
+                On top
+            </ToggleButton>
+            <ToggleButton Name="toggleTags" Style="{StaticResource ToggleButtonStyle}" IsChecked="true" Checked="toggleTags_Checked" Unchecked="toggleTags_Checked">
+                Tags
+            </ToggleButton>
+            <ToggleButton Name="toggleTagsOnTop" Style="{StaticResource ToggleButtonStyle}" IsChecked="True" Checked="toggleTagsOnTop_Checked" Unchecked="toggleTagsOnTop_Checked">
+                Tags on top
+            </ToggleButton>
+        </StatusBar>
+        <Grid Name="pnlNotebooks" DockPanel.Dock="Top" Background="White">
+
+        </Grid>
+    </DockPanel>
+</Window>
