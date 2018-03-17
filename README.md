@@ -1,6 +1,6 @@
+# OP.Notes
 ![OP.Notes](op.notes.png)
 
-# Project Description
 OP.Notes is a small note taking application which I've created after searching for a long time for a note taking application which would suit my needs:
 - It should work offline
 - If it has any formatting it should be in markdown syntax
