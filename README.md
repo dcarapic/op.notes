@@ -101,5 +101,4 @@ Note content is done via Avalon text editor with some additional features so sta
 You can filter the the messages by entering the text inside a textbox located next to the magnifier icon.
 
 ## Code quality
-Disclaimer: The application was created out of my immediate need and I am not a WPF programmer so please DON'T LOOK AT THE CODE! Seriously the code can be better but I did not have enough time. I will probably refactor most of it in future.
-Do not use the code to learn WPF as it is not written in WPF 'spirit'.
+Disclaimer: The application was created out of my immediate need so please DON'T LOOK AT THE CODE! Seriously the code can be better but I did not have enough time. I will probably refactor most of it in future.
